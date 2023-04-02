@@ -44,12 +44,8 @@ class Movies extends Component {
   }
 
   handleDelete = (movie) => {
-    let { movies } = this.state;
-    const index = movies.findIndex((obj) => obj === movie);
-    if (index !== -1) {
-      movies.splice(index, 1);
-      this.setState({ movies: movies });
-    }
+    const movies = this.state.movies.filter((mov) => mov._id !== movie._id);
+    this.setState({ movies: movies });
   };
 }
 
