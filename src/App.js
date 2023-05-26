@@ -1,5 +1,6 @@
 import "./App.css";
 import Movies from "./components/movies";
+import NavBar from "./components/navBar";
 
 function App() {
   return (
@@ -23,33 +24,8 @@ function App() {
           <span className="fs-4">Vidly app</span>
         </a>
 
-        <ul className="nav nav-pills">
-          <li className="nav-item">
-            <a href="/" className="nav-link active" aria-current="page">
-              Home
-            </a>
-          </li>
-          <li className="nav-item">
-            <a href="/" className="nav-link">
-              Features
-            </a>
-          </li>
-          <li className="nav-item">
-            <a href="/" className="nav-link">
-              Pricing
-            </a>
-          </li>
-          <li className="nav-item">
-            <a href="/" className="nav-link">
-              FAQs
-            </a>
-          </li>
-          <li className="nav-item">
-            <a href="/" className="nav-link">
-              About
-            </a>
-          </li>
-        </ul>
+        <NavBar />
+        
       </header>
 
       <main className="container">
