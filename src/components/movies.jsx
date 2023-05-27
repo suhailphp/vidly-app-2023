@@ -6,7 +6,7 @@ class Movies extends Component {
   state = {
     movies: getMovies(),
     pageNumber:1,
-    pageLength:3
+    pageLength:10
   };
   render() {
 
