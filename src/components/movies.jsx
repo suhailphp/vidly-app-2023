@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import { getMovies } from "../services/fakeMovieService";
 import Like from "./like"
+import Pagination from "./pagination";
 class Movies extends Component {
   state = {
     movies: getMovies(),
+    pageNumber:1,
+    pageLength:3
   };
   render() {
 
@@ -49,6 +52,11 @@ class Movies extends Component {
             })}
           </tbody>
         </table>
+        <Pagination
+          pageNumber={this.state.pageNumber}
+          pageLength={this.state.pageLength}
+          dataCount={this.state.movies.length}
+        ></Pagination>
       </>
     );
   }
