@@ -26,10 +26,10 @@ const Pagination = ({currentPage,pageSize,itemCount,onPageChange}) => {
 }
 
 Pagination.propTypes = {
-    currentPage:propTypes.number,
-    pageSize:propTypes.number,
-    itemCount:propTypes.number,
-    onPageChange:propTypes.func,
+    currentPage:propTypes.number.isRequired,
+    pageSize:propTypes.number.isRequired,
+    itemCount:propTypes.number.isRequired,
+    onPageChange:propTypes.func.isRequired,
 }
  
 export default Pagination;
