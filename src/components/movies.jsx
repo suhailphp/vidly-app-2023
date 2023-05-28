@@ -59,7 +59,6 @@ class Movies extends Component {
           pageSize={this.state.pageSize}
           itemCount={this.state.movies.length}
           onPageChange={this.handlePageChange}
-
         ></Pagination>
       </>
     );
@@ -77,7 +76,6 @@ class Movies extends Component {
   }
 
   handlePageChange = (page) =>{
-    //console.log(page);
     this.setState({currentPage:page})
   }
 }
