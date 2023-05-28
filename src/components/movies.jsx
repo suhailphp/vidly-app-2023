@@ -5,8 +5,8 @@ import Pagination from "./pagination";
 class Movies extends Component {
   state = {
     movies: getMovies(),
-    pageNumber:1,
-    pageLength:10
+    currentPage:1,
+    pageSize:2
   };
   render() {
 
@@ -53,9 +53,11 @@ class Movies extends Component {
           </tbody>
         </table>
         <Pagination
-          pageNumber={this.state.pageNumber}
-          pageLength={this.state.pageLength}
-          dataCount={this.state.movies.length}
+          currentPage={this.state.currentPage}
+          pageSize={this.state.pageSize}
+          itemCount={this.state.movies.length}
+          onPageChange={this.handlePageChange}
+
         ></Pagination>
       </>
     );
@@ -70,6 +72,11 @@ class Movies extends Component {
     const index = movies.indexOf(movie)
     movies[index].liked = !movies[index].liked 
     this.setState({movies})
+  }
+
+  handlePageChange = (page) =>{
+    console.log(page);
+    this.setState({currentPage:page})
   }
 }
 
