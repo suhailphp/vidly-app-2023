@@ -1,6 +1,6 @@
 import "./App.css";
 import Movies from "./components/movies";
-import NavBar from "./components/navBar";
+import NavBar from "./components/common/navBar";
 
 function App() {
   return (
