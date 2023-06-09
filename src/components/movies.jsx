@@ -7,22 +7,25 @@ import Pagination from "./pagination";
 import {paginate} from "../utils/paginate"
 class Movies extends Component {
   state = {
-    movies: getMovies(),
-    genres: getGenres(),
+    movies: [],
+    genres: [],
     selectedGenre:{_id:null,name:'All Movies'},
     currentPage:1,
     pageSize:4
   };
+  componentDidMount(){
+    this.setState({movies:getMovies(),genres:[{_id:null,name:'All Movies'},...getGenres()]})
+  }
   render() {
     const {movies:AllMovies,currentPage,pageSize,selectedGenre} = this.state
-    const filteredMovies = (selectedGenre._id)?AllMovies.filter(movie=>movie.genre._id == selectedGenre._id):AllMovies
+    const filteredMovies = (selectedGenre._id)?AllMovies.filter(movie=>movie.genre._id === selectedGenre._id):AllMovies
     const movies = paginate(filteredMovies,currentPage,pageSize)
     //console.log(movies)
     return (
       <div className="row">
         <div className="col-2">
           <ListGroup
-            items={[{_id:null,name:'All Movies'},...this.state.genres]}
+            items={this.state.genres}
             onItemSelect={this.handleGenreSelect}
             selectedItem={this.state.selectedGenre}
           >
