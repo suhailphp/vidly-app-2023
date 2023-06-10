@@ -7,10 +7,10 @@ class MoviesTable extends Component {
             <table className="table">
             <thead>
               <tr>
-                <th scope="col">Title</th>
-                <th scope="col">Genre</th>
-                <th scope="col">Stock</th>
-                <th scope="col">Rate</th>
+                <th onClick={()=>this.props.onSort('title')} scope="col" style={{cursor:'pointer'}}>Title</th>
+                <th onClick={()=>this.props.onSort('genre.name')} scope="col" style={{cursor:'pointer'}}>Genre</th>
+                <th onClick={()=>this.props.onSort('numberInStock')} scope="col" style={{cursor:'pointer'}}>Stock</th>
+                <th onClick={()=>this.props.onSort('dailyRentalRate')} scope="col" style={{cursor:'pointer'}}>Rate</th>
                 <th scope="col"></th>
                 <th scope="col"></th>
               </tr>
