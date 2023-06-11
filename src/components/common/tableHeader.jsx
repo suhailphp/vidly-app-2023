@@ -7,7 +7,6 @@ class TableHeader extends Component {
       sortColumn = {path,order}
       onSort(sortColumn)
     }
-
     render() { 
         return (
             <thead>
@@ -15,12 +14,10 @@ class TableHeader extends Component {
                 {this.props.columns.map(column=>(
                     <th key={column.path||column.key} onClick={()=>this.raiseSort(column.path)} scope="col" style={{cursor:'pointer'}}>{column.label}</th>
                 ))}
-              
               </tr>
             </thead>
         );
     }
 }
- 
 export default TableHeader;
 
