@@ -8,7 +8,7 @@ import {Route,Routes} from "react-router-dom"
 
 function App() {
   return (
-    <>
+    <div>
       <header className="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
         <a href="/"className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
           <svg viewBox="0 0 24 24" fill="currentColor" className="bi me-2" width="40" height="32" >
@@ -19,7 +19,6 @@ function App() {
         </a>
         <NavBar />
       </header>
-
       <main className="container">
         <Routes>
             <Route path="/movies" exact element={<Movies/>} />
@@ -27,7 +26,7 @@ function App() {
             <Route path="/" exact element={<Home/>} />
         </Routes>
       </main>
-    </>
+    </div>
   );
 }
 

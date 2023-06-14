@@ -1,23 +1,23 @@
+import {Link} from "react-router-dom"
 const navBar = (props) => {
     return ( 
         <ul className="nav nav-pills">
           <li className="nav-item">
-            <a href="/" className="nav-link active" aria-current="page">
+            <Link to="/" className="nav-link active" aria-current="page">
               Home
-            </a>
+            </Link>
           </li>
           <li className="nav-item">
-            <a href="/movies" className="nav-link">
+            <Link to="/movies" className="nav-link">
               Movies
-            </a>
+            </Link>
           </li>
           <li className="nav-item">
-            <a href="/about" className="nav-link">
+            <Link to="/about" className="nav-link">
               About
-            </a>
+            </Link>
           </li>
         </ul>
      );
 }
- 
 export default navBar;
