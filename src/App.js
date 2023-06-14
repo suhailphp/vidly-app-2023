@@ -23,7 +23,7 @@ function App() {
         <Routes>
             <Route path="/movies" exact element={<Movies/>} />
             <Route path="/about" exact element={<About/>} />
-            <Route path="/" exact element={<Home/>} />
+            <Route path="/" exact element={<Home testProp ="helo"/>} />
         </Routes>
       </main>
     </div>

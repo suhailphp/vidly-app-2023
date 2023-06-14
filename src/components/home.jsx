@@ -1,6 +1,7 @@
 import React from 'react';
 
-const Home = () => {
+const Home = (props) => {
+    console.log(props.testProp);
     return ( 
         <div className="row">
             <div className="col-12">
