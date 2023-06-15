@@ -4,6 +4,7 @@ import About from "./components/about";
 import Movies from "./components/movies";
 import NavBar from "./components/common/navBar";
 import {Route,Routes} from "react-router-dom"
+import MovieDetail from "./components/movieDetail";
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
       </header>
       <main className="container">
         <Routes>
+            <Route path="/movies/:ID" exact element={<MovieDetail />} />
             <Route path="/movies" exact element={<Movies/>} />
             <Route path="/about" exact element={<About/>} />
             <Route path="/" exact element={<Home testProp ="helo"/>} />
