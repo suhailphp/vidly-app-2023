@@ -1,16 +1,23 @@
-import React from 'react';
-import {useParams} from "react-router-dom"
+import React, { Component } from 'react';
+import {useNavigate} from 'react-router-dom'
 
-const MovieDetail = (props) => {
-    const params = useParams()
-    console.log(params);
-    return ( 
-        <div className="row">
-            <div className="col-12">
-                <h1>Movie ID is {params.ID}</h1>
+class MovieDetail extends Component {
+    
+    handleSave=()=>{
+        const naviagete = useNavigate();
+        naviagete.push('/movies');
+    }
+    render() { 
+        return (
+            <div className="row">
+                <div className="col-12">
+                    <h1>Movie Detail page</h1>
+                    <button className="btn btn-sm btn-info" onClick={this.handleSave}>Save</button>
+                </div>
             </div>
-        </div>
-     );
+        );
+    }
 }
  
 export default MovieDetail;
+
