@@ -2,8 +2,9 @@ import "./App.css";
 import Home from "./components/home";
 import About from "./components/about";
 import Movies from "./components/movies";
+import NotFound from "./components/notFound";
 import NavBar from "./components/common/navBar";
-import {Route,Routes} from "react-router-dom"
+import {Route,Routes,Navigate} from "react-router-dom"
 import MovieDetail from "./components/movieDetail";
 
 
@@ -25,7 +26,13 @@ function App() {
             <Route path="/movies/:ID" exact element={<MovieDetail />} />
             <Route path="/movies" exact element={<Movies/>} />
             <Route path="/about" exact element={<About/>} />
-            <Route path="/" exact element={<Home testProp ="helo"/>} />
+            <Route path="/notFound" element={<NotFound/>} />
+            <Route path="/" exact element={<Home />} />
+            <Route
+                path="*"
+                element={<Navigate to="/notFound" replace />}
+            />
+            
         </Routes>
       </main>
     </div>
