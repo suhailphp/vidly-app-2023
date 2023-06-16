@@ -17,10 +17,9 @@ class Login extends Component {
     handleSubmit=(e)=>{
         e.preventDefault();
         let error = this.validate()
-        if(error){
-            this.setState({error})
+        this.setState({error:error||{}})
+        if(error)
             return false
-        } 
         console.log('submitted');
     }
     handleChange = (e)=>{
@@ -31,13 +30,13 @@ class Login extends Component {
     render() { 
         let {account,error} = this.state
         return (
-            <form onSubmit={this.handleSubmit} className='' >
+            <form onSubmit={this.handleSubmit} >
                 <h1>Login Form</h1>
                 <Input
                     name='userName'
                     label='User Name'
                     value={account.userName}
-                    error={(error.password)?error.password:null}
+                    error={(error.userName)?error.userName:null}
                     onChange={this.handleChange}
                 ></Input>
                 <Input
