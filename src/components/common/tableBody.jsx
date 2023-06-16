@@ -3,14 +3,11 @@ import _ from 'lodash'
 
 class TableBody extends Component {
     renderContent =(item,column)=>{
-      if(column.link){
-        return column.link(item)
-      }
-      else if(column.path){
-        return _.get(item,column.path)
+      if(column.content){
+        return column.content(item)
       }
       else{
-        return column.content(item)
+        return _.get(item,column.path)
       }
     }
     render() { 
