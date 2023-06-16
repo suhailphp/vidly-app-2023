@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
+import Input from './common/input';
 class Login extends Component {
     state = {
         account:{userName:'',password:''}
     } 
+    handleSubmit=(e)=>{
+        e.preventDefault();
+        console.log('submitted');
+    }
     handleChange = (e)=>{
         let account = {...this.state.account}
         account[e.currentTarget.name] = e.currentTarget.value;
@@ -10,18 +15,19 @@ class Login extends Component {
     }
     render() { 
         return (
-            <form >
+            <form onSubmit={this.handleSubmit} >
                 <h1>Login Form</h1>
-                <div className="mb-0">
-                    <label htmlFor="userName" className="form-label">Username</label>
-                    <input type="text" onChange={this.handleChange} name='userName' id='userName' className="form-control" />
-                    <div className="form-text">Please enter your username</div>
-                </div>
-                <div className="mb-2">
-                    <label htmlFor="password" onChange={this.handleChange}  className="form-label">Password</label>
-                    <input type="password" name='password' id='password' className="form-control" />
-                    <div className="form-text">Please enter your password</div>
-                </div>
+                <Input
+                    name='userName'
+                    label='User Name'
+                    onChange={this.handleChange}
+                ></Input>
+                <Input
+                    name='password'
+                    label='Password'
+                    type='password'
+                    onChange={this.handleChange}
+                ></Input>
                 <button className="btn btn-primary">Submit</button>
             </form>  
         );
