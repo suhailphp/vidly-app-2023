@@ -5,7 +5,7 @@ import {Link} from "react-router-dom"
 class MoviesTable extends Component {
     
     render() { 
-      const {movies,onLike,onDelete} = this.props;
+      const {movies} = this.props;
       const columns = [
         {path:'title',label:'Title',content:(movie=><Link to={`/movies/${movie._id}`}>{movie.title}</Link>)},
         {path:'genre.name',label:'Genre'},

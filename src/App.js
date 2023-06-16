@@ -7,6 +7,7 @@ import NavBar from "./components/common/navBar";
 import {Route,Routes,Navigate} from "react-router-dom"
 import MovieDetail from "./components/movieDetail";
 import Admin from "./components/admin";
+import Login from "./components/login";
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
       </header>
       <main className="container">
         <Routes>
+            <Route path="/login" exact element={<Login />} />
             <Route path="/movies/:ID" exact element={<MovieDetail />} />
             <Route path="/movies" exact element={<Movies/>} />
             <Route path="/about" exact element={<About/>} />
