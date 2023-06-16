@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Route,Routes,Link} from 'react-router-dom'
+import {Route,Routes,NavLink} from 'react-router-dom'
 import User from './user'
 import Post from './post'
 
@@ -12,14 +12,14 @@ class Admin extends Component {
                     <h1>Admin dasboard</h1>
                      <ul className="nav nav-pills">
                         <li className="nav-item">
-                            <Link to="/admin/user" className="nav-link" >
+                            <NavLink to="/admin/user" className="nav-link" >
                             Users
-                            </Link>
+                            </NavLink>
                         </li>
                         <li className="nav-item">
-                            <Link to="/admin/post" className="nav-link">
+                            <NavLink to="/admin/post" className="nav-link">
                             Post
-                            </Link>
+                            </NavLink>
                         </li>
                     </ul>
                     <Routes>
