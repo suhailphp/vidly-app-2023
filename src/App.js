@@ -6,6 +6,7 @@ import NotFound from "./components/notFound";
 import NavBar from "./components/common/navBar";
 import {Route,Routes,Navigate} from "react-router-dom"
 import MovieDetail from "./components/movieDetail";
+import Admin from "./components/admin";
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
             <Route path="/movies/:ID" exact element={<MovieDetail />} />
             <Route path="/movies" exact element={<Movies/>} />
             <Route path="/about" exact element={<About/>} />
+            <Route path="/admin/*" element={<Admin/>} />
             <Route path="/notFound" element={<NotFound/>} />
             <Route path="/" exact element={<Home />} />
             <Route
