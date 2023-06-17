@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import Input from './common/input';
-class Login extends Component {
+
+class LoginFrom extends Component {
     state = {
         account:{userName:'',password:''},
         error:{}
     } 
+
     validate =()=>{
         let error = {}
         let {account} = this.state
+    
         if(account.userName === '')
             error.userName = 'User name is required'
         if(account.password === '')
@@ -65,4 +68,4 @@ class Login extends Component {
     }
 }
  
-export default Login;
+export default LoginFrom;

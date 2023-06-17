@@ -7,6 +7,8 @@ import ListGroup from "./common/listGroup"
 import Pagination from "./common/pagination";
 import {paginate} from "../utils/paginate"
 import MoviesTable from "./moviesTable";
+import Input from './common/input';
+
 class Movies extends Component {
   state = {
     movies: [],
@@ -14,7 +16,8 @@ class Movies extends Component {
     selectedGenre:{_id:null,name:'All Movies'},
     sortColumn:{path:'title',order:'asc'},
     currentPage:1,
-    pageSize:4
+    pageSize:4,
+    searchQuery:''
   };
   componentDidMount(){
     this.setState({movies:getMovies(),genres:[{_id:null,name:'All Movies'},...getGenres()]})
@@ -26,7 +29,7 @@ class Movies extends Component {
     this.setState({currentPage:page})
   }
   handleGenreSelect= (genre)=>{
-    this.setState({selectedGenre:genre,currentPage:1})
+    this.setState({selectedGenre:genre,currentPage:1,searchQuery:''})
   }
   handleLike = (movie) => {
     const movies = [...this.state.movies]
@@ -38,9 +41,13 @@ class Movies extends Component {
     const movies = this.state.movies.filter((mov) => mov._id !== movie._id);
     this.setState({ movies: movies });
   };
+  handleSearch =(e) =>{
+    this.setState({searchQuery:e.currentTarget.value})
+  }
   render() {
-    const {movies:AllMovies,currentPage,pageSize,selectedGenre,sortColumn} = this.state
-    const filteredMovies = (selectedGenre._id)?AllMovies.filter(movie=>movie.genre._id === selectedGenre._id):AllMovies
+    const {movies:AllMovies,currentPage,pageSize,selectedGenre,sortColumn,searchQuery} = this.state
+    const searchedMovie = (searchQuery)?AllMovies.filter(movie=>movie.title.toLowerCase().startsWith(searchQuery.toLowerCase())):AllMovies
+    const filteredMovies = (selectedGenre._id)?searchedMovie.filter(movie=>movie.genre._id === selectedGenre._id):searchedMovie
     const sortedMovie = _.orderBy(filteredMovies,[sortColumn.path],[sortColumn.order])
     const movies = paginate(sortedMovie,currentPage,pageSize)
     //console.log(movies)
@@ -55,6 +62,15 @@ class Movies extends Component {
           </ListGroup>
         </div>
         <div className="col-10">
+
+           <Input
+                name='search'
+                label='Search movie'
+                value={this.state.searchQuery}
+                error=''
+                onChange={this.handleSearch}
+            ></Input>
+
             <p>Total {this.state.movies.length} movie</p>
           <MoviesTable
             movies={movies}
