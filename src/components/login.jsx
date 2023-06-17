@@ -59,7 +59,7 @@ class Login extends Component {
                     error={(error.password)?error.password:null}
                     onChange={this.handleChange}
                 ></Input>
-                <button className="btn btn-primary">Submit</button>
+                <button className="btn btn-primary" disabled={this.validate()}>Submit</button>
             </form>  
         );
     }
