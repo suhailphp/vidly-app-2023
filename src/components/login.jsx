@@ -14,6 +14,14 @@ class Login extends Component {
             error.password = 'Password is required'
         return Object.keys(error).length === 0?null:error
     }
+    validateProperty=(input)=>{
+        if(input.name == 'userName'){
+            if(input.value === '') return 'username is required'
+        }
+        if(input.name == 'password'){
+            if(input.value === '') return 'password is required'
+        }
+    }
     handleSubmit=(e)=>{
         e.preventDefault();
         let error = this.validate()
@@ -23,9 +31,13 @@ class Login extends Component {
         console.log('submitted');
     }
     handleChange = (e)=>{
+        let error = {...this.state.error}
+        let errorMessage = this.validateProperty(e.currentTarget)
+        if(errorMessage) error[e.currentTarget.name] = errorMessage
+        else delete error[e.currentTarget.name]
         let account = {...this.state.account}
         account[e.currentTarget.name] = e.currentTarget.value;
-        this.setState({account})
+        this.setState({account,error})
     }
     render() { 
         let {account,error} = this.state
