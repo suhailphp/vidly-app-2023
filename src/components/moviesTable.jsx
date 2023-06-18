@@ -8,7 +8,7 @@ class MoviesTable extends Component {
       const {movies} = this.props;
       const columns = [
         {path:'title',label:'Title',content:(movie=><Link to={`/movies/${movie.movieID}`}>{movie.title}</Link>)},
-        {path:'genre.name',label:'Genre'},
+        {path:'Genre.name',label:'Genre'},
         {path:'numberInStock',label:'Stock'},
         {path:'dailyRentalRate',label:'Rate'},
         {key:'like',content: (movie=><Like liked={movie.liked} onClick={()=>this.props.onLike(movie)}/>)},

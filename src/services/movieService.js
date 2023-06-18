@@ -79,23 +79,16 @@ export async function deleteMovie(movieID) {
   return response
 }
 
+export async function saveMovie(movie) {
+  let response = await http.post(config.apiEndpoint+'movie/',movie)
+  console.log(response)
+  return response
+}
+
 export function getMovie(id) {
   return movies.find(m => m.movieID === id);
 }
 
-export function saveMovie(movie) {
-  let movieInDb = movies.find(m => m.movieID === movie.movieID) || {};
-  movieInDb.name = movie.name;
-  //movieInDb.genre = genresAPI.genres.find(g => g.movieID === movie.genreId);
-  movieInDb.numberInStock = movie.numberInStock;
-  movieInDb.dailyRentalRate = movie.dailyRentalRate;
 
-  if (!movieInDb.movieID) {
-    movieInDb.movieID = Date.now();
-    movies.push(movieInDb);
-  }
-
-  return movieInDb;
-}
 
 

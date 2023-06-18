@@ -8,6 +8,7 @@ import Pagination from "./common/pagination";
 import {paginate} from "../utils/paginate"
 import MoviesTable from "./moviesTable";
 import Input from './common/input';
+import { Link } from "react-router-dom";
 
 class Movies extends Component {
   state = {
@@ -49,7 +50,7 @@ class Movies extends Component {
       await deleteMovie(movie.movieID)
     }
     catch(e){
-      if(e.response && e.response.status == 404){
+      if(e.response && e.response.status === 404){
         alert('Movie already deleted')
       }
       this.setState({movies:originalMovie})
@@ -57,6 +58,9 @@ class Movies extends Component {
   };
   handleSearch =(e) =>{
     this.setState({searchQuery:e.currentTarget.value})
+  }
+  newMoviePage(){
+
   }
   render() {
     const {movies:AllMovies,currentPage,pageSize,selectedGenre,sortColumn,searchQuery} = this.state
@@ -76,6 +80,10 @@ class Movies extends Component {
           </ListGroup>
         </div>
         <div className="col-10">
+
+          <Link className="btn btn-primary " to="/movies/new" >
+            New Movie
+          </Link>
 
            <Input
                 name='search'
