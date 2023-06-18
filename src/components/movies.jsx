@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { getMovies } from "../services/fakeMovieService";
-import { getGenres } from "../services/fakeGenreService";
+import { getMovies } from "../services/movieService";
+import { getGenres } from "../services/genreService";
 import _ from 'lodash'
 
 import ListGroup from "./common/listGroup"
@@ -13,14 +13,18 @@ class Movies extends Component {
   state = {
     movies: [],
     genres: [],
-    selectedGenre:{_id:null,name:'All Movies'},
+    selectedGenre:{genreID:null,name:'All Movies'},
     sortColumn:{path:'title',order:'asc'},
     currentPage:1,
     pageSize:4,
     searchQuery:''
   };
-  componentDidMount(){
-    this.setState({movies:getMovies(),genres:[{_id:null,name:'All Movies'},...getGenres()]})
+  async componentDidMount(){
+    let genres = await getGenres()
+    this.setState({
+      movies:await getMovies(),
+      genres:[{genreID:null,name:'All Movies'},...genres]
+    })
   }
   handleSort = (sortColumn) =>{
     this.setState({sortColumn})
@@ -38,7 +42,7 @@ class Movies extends Component {
     this.setState({movies})
   }
   handleDelete = (movie) => {
-    const movies = this.state.movies.filter((mov) => mov._id !== movie._id);
+    const movies = this.state.movies.filter((mov) => mov.movieID !== movie.movieID);
     this.setState({ movies: movies });
   };
   handleSearch =(e) =>{
@@ -47,7 +51,7 @@ class Movies extends Component {
   render() {
     const {movies:AllMovies,currentPage,pageSize,selectedGenre,sortColumn,searchQuery} = this.state
     const searchedMovie = (searchQuery)?AllMovies.filter(movie=>movie.title.toLowerCase().startsWith(searchQuery.toLowerCase())):AllMovies
-    const filteredMovies = (selectedGenre._id)?searchedMovie.filter(movie=>movie.genre._id === selectedGenre._id):searchedMovie
+    const filteredMovies = (selectedGenre.genreID)?searchedMovie.filter(movie=>movie.Genre.genreID === selectedGenre.genreID):searchedMovie
     const sortedMovie = _.orderBy(filteredMovies,[sortColumn.path],[sortColumn.order])
     const movies = paginate(sortedMovie,currentPage,pageSize)
     //console.log(movies)

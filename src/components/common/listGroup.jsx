@@ -16,7 +16,7 @@ const ListGroup = ({items,selectedItem,onItemSelect,textProperty,valueProperty})
 
 ListGroup.defaultProps={
     textProperty:"name",
-    valueProperty:'_id'
+    valueProperty:'genreID'
 }
 
  

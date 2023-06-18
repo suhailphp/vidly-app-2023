@@ -18,10 +18,10 @@ class LoginFrom extends Component {
         return Object.keys(error).length === 0?null:error
     }
     validateProperty=(input)=>{
-        if(input.name == 'userName'){
+        if(input.name === 'userName'){
             if(input.value === '') return 'username is required'
         }
-        if(input.name == 'password'){
+        if(input.name === 'password'){
             if(input.value === '') return 'password is required'
         }
     }

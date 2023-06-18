@@ -16,9 +16,9 @@ class TableBody extends Component {
             <tbody>
               {data.map((item) => {
                 return (
-                  <tr key={item._id}>
+                  <tr key={item.movieID}>
                     {columns.map(column=>(
-                        <td key={item._id+(column.path||column.key)}>
+                        <td key={item.movieID+(column.path||column.key)}>
                             {
                               //column.path?_.get(item,column.path):column.content(item)
                               this.renderContent(item,column)
