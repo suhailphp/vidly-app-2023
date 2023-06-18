@@ -112,8 +112,5 @@ class Movies extends Component {
       </div>
     );
   }
-
-  
 }
-
 export default Movies;

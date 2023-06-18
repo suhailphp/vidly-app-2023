@@ -37,7 +37,8 @@ class MovieForm extends Component {
             this.setState({movie:movieUpdate})
         }
         catch(e){
-            alert("Something went wrong")
+            console.log(e)
+            this.props.navigate('/notFound');
         }
     }
 
