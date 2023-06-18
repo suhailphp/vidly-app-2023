@@ -5,7 +5,7 @@ import Movies from "./components/movies";
 import NotFound from "./components/notFound";
 import NavBar from "./components/common/navBar";
 import {Route,Routes,Navigate} from "react-router-dom"
-import MovieDetail from "./components/movieDetail";
+// import MovieDetail from "./components/movieDetail";
 import Admin from "./components/admin";
 import LoginFrom from "./components/loginForm";
 import MovieForm from "./components/movieForm";
@@ -28,8 +28,7 @@ function App() {
       <main className="container">
         <Routes>
             <Route path="/login" exact element={<LoginFrom />} />
-            <Route path="/movies/new" exact element={<MovieForm />} />
-            <Route path="/movies/:ID" exact element={<MovieDetail />} />
+            <Route path="/movies/:movieID" exact element={<MovieForm />} />
             <Route path="/movies" exact element={<Movies/>} />
             <Route path="/about" exact element={<About/>} />
             <Route path="/admin/*" element={<Admin/>} />

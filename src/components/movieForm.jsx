@@ -2,15 +2,13 @@ import React, { Component } from 'react';
 import Input from './common/input';
 import Select from './common/select';
 import { getGenres } from "../services/genreService";
-import { saveMovie} from "../services/movieService";
-import {useNavigate} from "react-router-dom"
-
-
-
+import { saveMovie,getMovie} from "../services/movieService";
+import {useNavigate,useParams} from "react-router-dom"
 
 class MovieForm extends Component {
     state = {
-        mvoie:{
+        movie:{
+            movieID:'',
             title:'',
             genreID:'',
             numberInStock:'',
@@ -23,19 +21,37 @@ class MovieForm extends Component {
     async componentDidMount(){
         let genres = await getGenres()
         this.setState({ genres })
+        let {movieID} = this.props;
+        if(movieID === 'new') return null
+        try{
+            const {data} = await getMovie(movieID)
+            if(!data)
+                this.props.navigate('/notFound');
+            const movieUpdate = {
+                movieID:data.movieID,
+                title:data.title,
+                genreID:data.genreID,
+                dailyRentalRate:data.dailyRentalRate,
+                numberInStock:data.numberInStock,
+            }
+            this.setState({movie:movieUpdate})
+        }
+        catch(e){
+            alert("Something went wrong")
+        }
     }
 
     validate =()=>{
         let error = {}
-        let {mvoie} = this.state
+        let {movie} = this.state
     
-        if(mvoie.title === '')
+        if(movie.title === '')
             error.title = 'User name is required'
-        if(mvoie.genreID === '')
+        if(movie.genreID === '')
             error.genreID = 'Password is required'
-        if(mvoie.dailyRentalRate === '')
+        if(movie.dailyRentalRate === '')
             error.dailyRentalRate = 'Rate is required'
-        if(mvoie.numberInStock === '')
+        if(movie.numberInStock === '')
             error.password = 'Stock is required'
 
         return Object.keys(error).length === 0?null:error
@@ -61,11 +77,10 @@ class MovieForm extends Component {
         if(error)
             return false
         try{
-            let response = await saveMovie(this.state.mvoie)
-            console.log(response)
+            await saveMovie(this.state.movie)
+            //console.log(response)
             alert('Movie saved on the databse')
             this.props.navigate('/movies');
-
         }
         catch(e){
             console.log(e)
@@ -79,27 +94,27 @@ class MovieForm extends Component {
         let errorMessage = this.validateProperty(e.currentTarget)
         if(errorMessage) error[e.currentTarget.name] = errorMessage
         else delete error[e.currentTarget.name]
-        let mvoie = {...this.state.mvoie}
-        mvoie[e.currentTarget.name] = e.currentTarget.value;
-        this.setState({mvoie,error})
+        let movie = {...this.state.movie}
+        movie[e.currentTarget.name] = e.currentTarget.value;
+        this.setState({movie,error})
     }
     render() { 
 
-        let {mvoie,error,genres} = this.state
+        let {movie,error,genres} = this.state
         return (
             <form onSubmit={this.handleSubmit} >
                 <h1>Login Form</h1>
                 <Input
                     name='title'
                     label='Title'
-                    value={mvoie.title}
+                    value={movie.title}
                     error={(error.title)?error.title:null}
                     onChange={this.handleChange}
                 ></Input>
                 <Select
                     name='genreID'
                     label='Genre'
-                    value={mvoie.genreID}
+                    value={movie.genreID}
                     options={genres}
                     error={(error.genreID)?error.genreID:null}
                     onChange={this.handleChange}
@@ -107,14 +122,14 @@ class MovieForm extends Component {
                 <Input
                     name='dailyRentalRate'
                     label='Daily Rental Rate'
-                    value={mvoie.dailyRentalRate}
+                    value={movie.dailyRentalRate}
                     error={(error.dailyRentalRate)?error.dailyRentalRate:null}
                     onChange={this.handleChange}
                 ></Input>
                 <Input
                     name='numberInStock'
                     label='Number in stock'
-                    value={mvoie.numberInStock}
+                    value={movie.numberInStock}
                     error={(error.numberInStock)?error.numberInStock:null}
                     onChange={this.handleChange}
                 ></Input>
@@ -126,8 +141,8 @@ class MovieForm extends Component {
 
 const FormComponentWrapper = () => {
   const navigate = useNavigate();
-
-  return <MovieForm navigate={navigate} />;
+  const params = useParams();
+  return <MovieForm navigate={navigate}  movieID={params.movieID}  />;
 };
  
 export default FormComponentWrapper;
