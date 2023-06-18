@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { getMovies } from "../services/movieService";
+import { getMovies,deleteMovie } from "../services/movieService";
 import { getGenres } from "../services/genreService";
 import _ from 'lodash'
 
@@ -41,9 +41,19 @@ class Movies extends Component {
     movies[index].liked = !movies[index].liked 
     this.setState({movies})
   }
-  handleDelete = (movie) => {
+  handleDelete = async (movie) => {
+    let originalMovie = this.state.movies
     const movies = this.state.movies.filter((mov) => mov.movieID !== movie.movieID);
     this.setState({ movies: movies });
+    try{
+      await deleteMovie(movie.movieID)
+    }
+    catch(e){
+      if(e.response && e.response.status == 404){
+        alert('Movie already deleted')
+      }
+      this.setState({movies:originalMovie})
+    }
   };
   handleSearch =(e) =>{
     this.setState({searchQuery:e.currentTarget.value})

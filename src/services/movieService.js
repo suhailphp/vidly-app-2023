@@ -69,9 +69,14 @@ const movies = [
 ];
 
 export async function getMovies() {
-  let response = await http.get(config.apiEndpoint+'movie/api')
+  let response = await http.get(config.apiEndpoint+'movie')
   //console.log(response.data)
   return response.data
+}
+
+export async function deleteMovie(movieID) {
+  let response = await http.delete(config.apiEndpoint+'movie/'+movieID)
+  return response
 }
 
 export function getMovie(id) {
@@ -93,8 +98,4 @@ export function saveMovie(movie) {
   return movieInDb;
 }
 
-export function deleteMovie(id) {
-  let movieInDb = movies.find(m => m.movieID === id);
-  movies.splice(movies.indexOf(movieInDb), 1);
-  return movieInDb;
-}
+
