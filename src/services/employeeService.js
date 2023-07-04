@@ -1,5 +1,5 @@
 import http from './httpService'
-import config from './../config/config.json'
+import config from '../config/config.json'
 
 export async function getMovies() {
   let response = await http.get(config.apiEndpoint+'movie')
@@ -16,14 +16,9 @@ export async function getMovie(movieID) {
   return response
 }
 
-export async function saveMovie(movie) {
+export async function saveEmployee(employee) {
   let response =null
-  if(movie && movie.movieID === 'new'){
-    response = await http.post(config.apiEndpoint+'movie/',movie)
-  }
-  else{
-    response = await http.put(config.apiEndpoint+'movie/',movie)
-  }
+  response = await http.post(config.apiEndpoint+'employee/',employee)
   return response
 }
 
