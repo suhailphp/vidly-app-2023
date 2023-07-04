@@ -1,5 +1,6 @@
 import http from './httpService'
 import config from './../config/config.json'
+import { log } from 'joi-browser'
 
 export async function getMovies() {
   let response = await http.get(config.apiEndpoint+'movie')

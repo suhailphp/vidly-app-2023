@@ -5,10 +5,11 @@ import { getGenres } from "../services/genreService";
 import { saveMovie,getMovie} from "../services/movieService";
 import {useNavigate,useParams} from "react-router-dom"
 
+
 class MovieForm extends Component {
     state = {
         movie:{
-            movieID:'',
+            movieID:'new',
             title:'',
             genreID:'',
             numberInStock:'',
@@ -22,6 +23,7 @@ class MovieForm extends Component {
         let genres = await getGenres()
         this.setState({ genres })
         let {movieID} = this.props;
+        
         if(movieID === 'new') return null
         try{
             const {data} = await getMovie(movieID)
