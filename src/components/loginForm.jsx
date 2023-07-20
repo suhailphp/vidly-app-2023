@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Input from './common/input';
+import { loginEmployee } from '../services/authService';
+import {useNavigate} from "react-router-dom"
 
 class LoginFrom extends Component {
     state = {
@@ -25,13 +27,30 @@ class LoginFrom extends Component {
             if(input.value === '') return 'password is required'
         }
     }
-    handleSubmit=(e)=>{
+    handleSubmit=async(e)=>{
         e.preventDefault();
         let error = this.validate()
         this.setState({error:error||{}})
         if(error)
             return false
-        console.log('submitted');
+        try{
+            let response = await loginEmployee(this.state.account)
+            console.log(response)
+            alert('Employee Logged in')
+            this.props.navigate('/');
+        }
+        catch(e){
+            if(e.response && e.response.status === 401){
+                const error = this.state
+                error.userName = e.response.data
+                this.setState({error})
+                //alert("User name is note available, please chose another one!")
+            }
+            else{
+                console.log(e)
+                alert('Something went wrong when saving movie')
+            }
+        }
     }
     handleChange = (e)=>{
         let error = {...this.state.error}
@@ -68,4 +87,9 @@ class LoginFrom extends Component {
     }
 }
  
-export default LoginFrom;
+const FormComponentWrapper = () => {
+  const navigate = useNavigate();
+  return <LoginFrom navigate={navigate}  />;
+};
+ 
+export default FormComponentWrapper;

@@ -18,7 +18,7 @@ import config from '../config/config.json'
 
 export async function registerEmployee(employee) {
   let response =null
-  response = await http.post(config.apiEndpoint+'employee/',employee)
+  response = await http.post(config.apiEndpoint+'register/',employee)
   return response
 }
 
