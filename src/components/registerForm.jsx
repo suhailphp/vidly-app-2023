@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Input from './common/input';
-import { saveEmployee } from '../services/employeeService';
+import { registerEmployee } from '../services/employeeService';
 import {useNavigate} from "react-router-dom"
 
 class RegisterFrom extends Component {
@@ -54,21 +54,22 @@ class RegisterFrom extends Component {
         if(error)
             return false
         try{
-            await saveEmployee(this.state.account)
+            await registerEmployee(this.state.account)
             //console.log(response)
             alert('Employee saved on the databse')
             this.props.navigate('/');
         }
         catch(e){
-            if(e.response && e.response.status === 401)
-            {
-                alert("User name is note available, please chose another one!")
+            if(e.response && e.response.status === 401){
+                const error = this.state
+                error.userName = e.response.data
+                this.setState({error})
+                //alert("User name is note available, please chose another one!")
             }
             else{
                 console.log(e)
                 alert('Something went wrong when saving movie')
             }
-           
         }
     }
     handleChange = (e)=>{
