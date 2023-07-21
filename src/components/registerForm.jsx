@@ -12,7 +12,6 @@ class RegisterFrom extends Component {
     validate =()=>{
         let error = {}
         let {account} = this.state
-    
         if(account.fullNameEn === '')
             error.fullNameEn = 'full name is required'
         if(account.militaryNumber === '')

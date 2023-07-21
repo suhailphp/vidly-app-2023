@@ -35,7 +35,7 @@ class LoginFrom extends Component {
             return false
         try{
             let response = await loginEmployee(this.state.account)
-            console.log(response)
+            localStorage.setItem('token',response.data)
             alert('Employee Logged in')
             this.props.navigate('/');
         }
@@ -48,7 +48,7 @@ class LoginFrom extends Component {
             }
             else{
                 console.log(e)
-                alert('Something went wrong when saving movie')
+                alert('Something went wrong !')
             }
         }
     }
