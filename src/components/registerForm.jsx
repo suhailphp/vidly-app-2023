@@ -53,7 +53,7 @@ class RegisterFrom extends Component {
         if(error)
             return false
         try{
-            let response = await registerEmployee(this.state.account)
+            await registerEmployee(this.state.account)
             //console.log(response)
             alert('Employee saved on the databse')
             this.props.navigate('/');

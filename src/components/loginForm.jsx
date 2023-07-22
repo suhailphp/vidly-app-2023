@@ -37,7 +37,8 @@ class LoginFrom extends Component {
             let response = await loginEmployee(this.state.account)
             localStorage.setItem('token',response.data)
             alert('Employee Logged in')
-            this.props.navigate('/');
+            //this.props.navigate('/');
+            window.location="/";
         }
         catch(e){
             if(e.response && e.response.status === 401){

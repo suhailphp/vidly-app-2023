@@ -1,20 +1,36 @@
-import "./App.css";
+import {Route,Routes,Navigate} from "react-router-dom";
+import jwtDecode from "jwt-decode";
 import Home from "./components/home";
 import About from "./components/about";
 import Movies from "./components/movies";
 import NotFound from "./components/notFound";
 import NavBar from "./components/common/navBar";
-import {Route,Routes,Navigate} from "react-router-dom"
 // import MovieDetail from "./components/movieDetail";
 import Admin from "./components/admin";
 import LoginFrom from "./components/loginForm";
 import RegisterFrom from "./components/registerForm";
 import MovieForm from "./components/movieForm";
+import Logout from "./components/logout";
+
+import "./App.css";
 
 
 
-function App() {
-  return (
+import React, { Component } from 'react';
+class App extends Component {
+  state = {  } 
+   async componentDidMount() {
+    try{
+      let employee = jwtDecode(localStorage.getItem("token"));
+      await this.setState({employee})
+    }
+    catch(e){
+      console.log(e)
+    }
+  }
+
+  render() { 
+    return (
     <div>
       <header className="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
         <a href="/"className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
@@ -24,7 +40,7 @@ function App() {
           </svg>
           <span className="fs-4">Vidly app</span>
         </a>
-        <NavBar />
+        <NavBar employee={this.state.employee} />
       </header>
       <main className="container">
         <Routes>
@@ -34,6 +50,7 @@ function App() {
             <Route path="/movies" exact element={<Movies/>} />
             <Route path="/about" exact element={<About/>} />
             <Route path="/admin/*" element={<Admin/>} />
+            <Route path="/logout" element={<Logout/>} />
             <Route path="/notFound" element={<NotFound/>} />
             <Route path="/" exact element={<Home />} />
             <Route
@@ -45,6 +62,8 @@ function App() {
       </main>
     </div>
   );
+  }
 }
-
+ 
 export default App;
+

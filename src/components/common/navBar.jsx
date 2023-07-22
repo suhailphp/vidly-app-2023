@@ -1,5 +1,7 @@
+import React from 'react';
+
 import {NavLink} from "react-router-dom"
-const navBar = (props) => {
+const navBar = ({employee}) => {
     return ( 
         <ul className="nav nav-pills">
           <li className="nav-item">
@@ -21,16 +23,35 @@ const navBar = (props) => {
               Admin
             </NavLink>
           </li>
-          <li className="nav-item">
-            <NavLink to="/login" className="nav-link">
-              Login
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink to="/register" className="nav-link">
-              Register
-            </NavLink>
-          </li>
+          {(!employee)?
+          <React.Fragment>
+              <li className="nav-item">
+                <NavLink to="/login" className="nav-link">
+                  Login
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink to="/register" className="nav-link">
+                  Register
+                </NavLink>
+              </li>
+          </React.Fragment>
+          :
+          <React.Fragment>
+              <li className="nav-item">
+                <NavLink to="/profile" className="nav-link">
+                  {(employee)?employee.name:''}
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink to="/logout" className="nav-link">
+                  logout
+                </NavLink>
+              </li>
+          </React.Fragment>
+}
+
+          
         </ul>
      );
 }
